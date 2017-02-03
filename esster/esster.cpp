@@ -9,17 +9,18 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <string>
+#include <string.h>
 
-#include "src/headers/generator.h"
-#include "src/headers/sort.h"
+#include "headers/generator/generator.h"
+#include "headers/sort/sort.h"
 
 int main(int argc, char* argv[]) {
     for (int i = 1; i < argc; ++i) {
-        if (strcmp(argv[i], "-gen")) {
+        if (strcmp(argv[i], "-gen") == 0) {
+            puts("gen");
             generate();
         } else if (strcmp(argv[i], "-sort")) {
-            sort();
+            //sort();
         }
     }
     puts("Hello World!!!");

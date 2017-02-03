@@ -1,8 +1,6 @@
-//g++ main.cpp ./source/additional.cpp ./source/analyze.cpp ./source/bins.cpp ./source/generator.cpp ./source/list.cpp ./source/toymodel.cpp ./source/eigenvalues.cpp -llapack -lblas  ./source/my_root.cpp `root-config --libs --cflags` -lEG  -o execute
-
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
 
-OBJS =		esster.o
+OBJS =		esster.o src/generator/generator.o src/utils/folder_creator_util.o
 
 LIBS =
 
