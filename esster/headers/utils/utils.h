@@ -8,12 +8,16 @@
 #ifndef UTILS_H_
 #define UTILS_H_
 
-#include<string.h>
-#include<errno.h>
+#include <iostream>
+#include <string.h>
+#include <errno.h>
+#include <fstream>
+#include <math.h>
+#include <time.h>
+#include <stdlib.h>
 
 #include "constants.h"
 
-void create_folder(string path, string name);
-
+void create_folder(string path);
 
 #endif /* UTILS_H_ */
