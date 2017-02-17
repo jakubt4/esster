@@ -11,13 +11,11 @@
 #include <iostream>
 #include <string.h>
 
-#include "headers/generator/generator.h"
-#include "headers/sort/sort.h"
-#include "src/EventsGenerator.h"
-#include "src/Event.h"
-#include "src/EventPart.h"
-#include "src/EventsGeneratorUtil.h"
-#include "src/utils/folder_creator_util.cpp"
+#include "src/event/shape/sort/events/generator/header/EventsGenerator.h"
+#include "src/event/shape/sort/events/headers/Event.h"
+#include "src/event/shape/sort/events/headers/EventPart.h"
+
+#include "src/event/shape/sort/events/reader/Reader.h"
 
 int main(int argc, char* argv[]) {
 //    for (int i = 1; i < argc; ++i) {
@@ -31,20 +29,24 @@ int main(int argc, char* argv[]) {
 //            //sort();
 //        }
 //    }
-    EventsGenerator eveGen(100);
-    std::list<Event> events = eveGen.generate();
+//    EventsGenerator eveGen(100);
+//    std::list<Event> events = eveGen.generate();
+//
+    Reader reader(GEN_EVENTS_FILE_PATH);
+    std::list<Event> ev = reader.readData();
 
-    create_folder(GEN_PATH);
     ofstream events_f;
-    events_f.open(GEN_EVENTS_FILE_PATH.c_str());
+    events_f.open(LOADED_EVENTS_FILE_PATH.c_str());
     int en = 1;
-    for (Event e : events) {
+    for (Event e : ev) {
         for (EventPart ep : e.get()) {
             events_f << en << setw(15) << ep.getAngle() << setw(15) << ep.getParticles() << endl;
-            cout << en << setw(15) << ep.getAngle() << setw(15) << ep.getParticles() << endl;
         }
         en++;
     }
     events_f.close();
+
+    cout << "ALL DONE" << endl;
+
     return EXIT_SUCCESS;
 }
