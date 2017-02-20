@@ -27,12 +27,12 @@ int Event::getMultiplicity() {
     return multiplicity;
 }
 
-void Event::setQ2(double _q2) {
-    q2 = _q2;
+void Event::setSorter(double _sorter) {
+    sorter = _sorter;
 }
 
-double Event::getQ2() {
-    return q2;
+double Event::getSorter() {
+    return sorter;
 }
 
 

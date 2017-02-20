@@ -35,7 +35,7 @@ std::list<Event> EventsGenerator::generate() {
 const int _PI = 3141593;
 
 int EventsGenerator::generateRandomNumber() {
-    return rand() % 1000 + 1;
+    return rand() % 100 + 1;
 }
 
 double EventsGenerator::generateRandomAngle() {
@@ -48,7 +48,7 @@ double EventsGenerator::generateRandomAngle() {
 
 void EventsGenerator::prepareEvent() {
     Event e;
-    int numOfParts = generateRandomNumber() % 100;
+    int numOfParts = generateRandomNumber();
     for (int i = 0; i < numOfParts; i++) {
         int particles = generateRandomNumber();
         double angle = generateRandomAngle();

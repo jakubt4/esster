@@ -15,15 +15,15 @@ class Event {
     private:
         std::list<EventPart> eventParts;
         int multiplicity;
-        double q2 = 0.0;
+        double sorter = 0.0;
     public:
         Event();
         void addEventPart(const EventPart eventPart);
         std::list<EventPart> get();
         void setMultiplicity(int _multiplicity);
         int getMultiplicity();
-        void setQ2(double _q2);
-        double getQ2();
+        void setSorter(double _sorter);
+        double getSorter();
         void sortEventPartByAngles();
         virtual ~Event();
 };

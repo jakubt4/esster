@@ -8,7 +8,8 @@
 #ifndef EVENT_SHAPE_SORT_EVENTS_HEADERS_BIN_H_
 #define EVENT_SHAPE_SORT_EVENTS_HEADERS_BIN_H_
 
-#include "../common/CommonLibraries.h"
+#include "../../common/CommonLibraries.h"
+#include "Event.h"
 
 class Bin {
     private:

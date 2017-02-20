@@ -8,7 +8,7 @@
 #include "../headers/Events.h"
 
 bool compare(Event ev_a, Event ev_b) {
-    return ev_a.getQ2() < ev_b.getQ2();
+    return ev_a.getSorter() < ev_b.getSorter();
 }
 
 Events::Events(std::list<Event> _events) {
@@ -18,6 +18,14 @@ Events::Events(std::list<Event> _events) {
 
 std::list<Event> Events::get() {
     return events;
+}
+
+void Events::sort() {
+    events.sort(compare);
+}
+
+int Events::size() {
+    return events.size();
 }
 
 Events::~Events() {

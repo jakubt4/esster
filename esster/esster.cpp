@@ -16,6 +16,7 @@
 #include "src/event/shape/sort/events/headers/EventPart.h"
 #include "src/event/shape/sort/events/headers/Events.h"
 #include "src/event/shape/sort/events/reader/Reader.h"
+#include "src/event/shape/sort/sorter/Sorter.h"
 
 int main(int argc, char* argv[]) {
 //    for (int i = 1; i < argc; ++i) {
@@ -29,26 +30,25 @@ int main(int argc, char* argv[]) {
 //            //sort();
 //        }
 //    }
-    EventsGenerator eveGen(100000);
-    eveGen.generate();
+//    EventsGenerator eveGen(1000);
+//    eveGen.generate();
 
     Reader reader(GEN_EVENTS_FILE_PATH);
     std::list<Event> evReaded = reader.readData();
-    Events events(evReaded);
-
-    ofstream events_f;
-    events_f.open(LOADED_EVENTS_FILE_PATH.c_str());
-    int en = 1;
-    for (Event e : events.get()) {
-//        for (EventPart ep : e.get()) {
-//            events_f << en << setw(15) << ep.getAngle() << setw(15) << ep.getParticles() << setw(15) << e.getQ2()
-//                    << endl;
-//        }
-        events_f << en << setw(15) << e.getMultiplicity() << setw(15) << e.getQ2() << endl;
-        en++;
-    }
-    events_f.close();
-
+    Sorter sorter(evReaded);
+//    Events events(evReaded);
+//    ofstream events_f;
+//    events_f.open(LOADED_EVENTS_FILE_PATH.c_str());
+//    int en = 1;
+//    for (Event e : events.get()) {
+////        for (EventPart ep : e.get()) {
+////            events_f << en << setw(15) << ep.getAngle() << setw(15) << ep.getParticles() << setw(15) << e.getQ2()
+////                    << endl;
+////        }
+//        events_f << en << setw(15) << e.getMultiplicity() << setw(15) << e.getSorter() << endl;
+//        en++;
+//    }
+//    events_f.close();
     cout << "ALL DONE" << endl;
 
     return EXIT_SUCCESS;

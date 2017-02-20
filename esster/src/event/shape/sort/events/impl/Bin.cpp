@@ -5,7 +5,7 @@
  *      Author: ary
  */
 
-#include "../events/headers/Bin.h"
+#include "../headers/Bin.h"
 
 Bin::Bin() {
 }
@@ -19,6 +19,5 @@ std::list<Event> Bin::get() {
 }
 
 Bin::~Bin() {
-    delete events;
 }
 

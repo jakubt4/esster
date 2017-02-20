@@ -11,6 +11,6 @@
 #include <iostream>
 #include <list>
 
-
+using namespace std;
 
 #endif /* EVENT_SHAPE_SORT_COMMON_COMMONLIBRARIES_H_ */

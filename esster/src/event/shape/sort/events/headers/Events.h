@@ -8,7 +8,6 @@
 #ifndef EVENT_SHAPE_SORT_EVENTS_HEADERS_EVENTS_H_
 #define EVENT_SHAPE_SORT_EVENTS_HEADERS_EVENTS_H_
 
-#include "../../common/CommonLibraries.h"
 #include "Event.h"
 
 class Events {
@@ -17,6 +16,8 @@ class Events {
     public:
         Events(std::list<Event> _events);
         std::list<Event> get();
+        void sort();
+        int size();
         virtual ~Events();
 };
 
