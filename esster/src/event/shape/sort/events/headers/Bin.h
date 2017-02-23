@@ -14,10 +14,12 @@
 class Bin {
     private:
         std::list<Event> events;
+        int id;
     public:
-        Bin();
+        Bin(int _id);
         void addEvent(Event event);
         std::list<Event> get();
+        int getId();
         virtual ~Bin();
 };
 

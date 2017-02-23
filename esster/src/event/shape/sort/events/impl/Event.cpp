@@ -9,6 +9,9 @@
 
 Event::Event() {
     multiplicity = 0;
+    for (int i = 0; i < 20; i++) {
+        angle_bin[i] = 0;
+    }
 }
 
 void Event::addEventPart(EventPart eventPart) {
@@ -35,14 +38,33 @@ double Event::getSorter() {
     return sorter;
 }
 
-
-bool compare(EventPart evP_a, EventPart evP_b) {
-    return evP_a.getAngle() < evP_b.getAngle();
+void Event::setActualBin(int _id) {
+    id = _id;
 }
 
+int Event::getActualBin() {
+    return id;
+}
 
-void Event::sortEventPartByAngles() {
-    eventParts.sort(compare);
+void Event::fillAngleBin() {
+    long double baseAngle = PI / 10.0;
+    for (EventPart eventPart : eventParts) {
+        long double angle = eventPart.getAngle();
+        for (int i = 0; i < 20; i++) {
+            if (angle > (baseAngle * i) && angle < (baseAngle * (i + 1))) {
+                angle_bin[i] = angle_bin[i] + eventPart.getParticles();
+            }
+        }
+    }
+}
+
+int* Event::getAngleBin() {
+    return angle_bin;
+}
+
+EventPart Event::getActualEventPart(int actualEventPart) {
+    std::vector<EventPart> vecEventPart { eventParts.begin(), eventParts.end() };
+    return vecEventPart[actualEventPart];
 }
 
 Event::~Event() {

@@ -32,7 +32,7 @@ std::list<Event> Reader::readData() {
 
             e->setSorter(q_2);
             e->setMultiplicity(multiplicity);
-            e->sortEventPartByAngles();
+            e->fillAngleBin();
             multiplicity = 0;
             actualEvent = eventNumber;
             if (actualEvent % 1000 == 0) {
@@ -57,7 +57,7 @@ std::list<Event> Reader::readData() {
     q_2 = sqrt(pow(q_x, 2) + pow(q_y, 2)) / sqrt(multiplicity);
     e->setSorter(q_2);
     e->setMultiplicity(multiplicity);
-    e->sortEventPartByAngles();
+    e->fillAngleBin();
     events.push_back(*e);
     cout << "Data loaded." << endl;
     return events;

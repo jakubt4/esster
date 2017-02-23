@@ -7,7 +7,8 @@
 
 #include "../headers/Bin.h"
 
-Bin::Bin() {
+Bin::Bin(int _id) {
+    id = _id;
 }
 
 void Bin::addEvent(Event event) {
@@ -16,6 +17,10 @@ void Bin::addEvent(Event event) {
 
 std::list<Event> Bin::get() {
     return events;
+}
+
+int Bin::getId() {
+    return id;
 }
 
 Bin::~Bin() {
