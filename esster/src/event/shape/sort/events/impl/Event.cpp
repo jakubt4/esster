@@ -38,11 +38,11 @@ double Event::getSorter() {
     return sorter;
 }
 
-void Event::setActualBin(int _id) {
+void Event::setActualEventBin(int _id) {
     id = _id;
 }
 
-int Event::getActualBin() {
+int Event::getActualEventBin() {
     return id;
 }
 
@@ -51,7 +51,7 @@ void Event::fillAngleBin() {
     for (EventPart eventPart : eventParts) {
         long double angle = eventPart.getAngle();
         for (int i = 0; i < 20; i++) {
-            if (angle > (baseAngle * i) && angle < (baseAngle * (i + 1))) {
+            if (angle >= (baseAngle * i) && angle < (baseAngle * (i + 1))) {
                 angle_bin[i] = angle_bin[i] + eventPart.getParticles();
             }
         }

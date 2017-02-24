@@ -13,7 +13,7 @@ Sorter::Sorter(std::list<Event> _events) {
     int j = 1;
     Bin* bin = new Bin(i);
     for (Event event : events->get()) {
-        event.setActualBin(i);
+        event.setActualEventBin(i);
         bin->addEvent(event);
         if (j % eventsInBin == 0) {
             bins.push_back(*bin);
@@ -118,8 +118,8 @@ Events Sorter::sort() {
         std::list<Bin> newBins;
         Bin* bin = new Bin(i);
         for (Event event : events->get()) {
-            if (event.getActualBin() != i) {
-                event.setActualBin(i);
+            if (event.getActualEventBin() != i) {
+                event.setActualEventBin(i);
                 sort = true;
             }
             bin->addEvent(event);

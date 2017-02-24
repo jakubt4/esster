@@ -27,8 +27,8 @@ class Event {
         int getMultiplicity();
         void setSorter(double _sorter);
         double getSorter();
-        void setActualBin(int _id);
-        int getActualBin();
+        void setActualEventBin(int _id);
+        int getActualEventBin();
         void fillAngleBin();
         int* getAngleBin();
         long double PI = 3.14159265358979323846;
