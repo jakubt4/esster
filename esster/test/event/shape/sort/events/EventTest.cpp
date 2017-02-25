@@ -9,7 +9,7 @@
 #include <stdexcept>
 
 int main() {
-
+    cout << "START Event TEST..." << endl;
     Event ev;
     int M = 0;
     for (int i = 0; i < 10; i++) {
@@ -89,5 +89,5 @@ int main() {
                 break;
         }
     }
-    cout << "EventTest successful" << endl;
+    cout << "EventTest SUCCESSFUL DONE" << endl;
 }

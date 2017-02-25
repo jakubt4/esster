@@ -25,6 +25,11 @@ long double Puni::compute_P_u_ni() {
         long double resultPniuPart = pniu.compute_P_ni_u();
         denominator += resultPniuPart / 10.0;
     }
+
+    if (denominator == 0) {
+        return 0;
+    }
+
     long double result = numerator / denominator;
     return result;
 }

@@ -10,8 +10,8 @@
 #include <stdexcept>
 
 int main() {
+    cout << "START PiuTest - P(i|u)..." << endl;
     Bin b(1);
-
     for (int i = 0; i < 10; i++) {
         Event e;
         EventPart ep1(50, 0);
@@ -41,5 +41,5 @@ int main() {
         throw std::invalid_argument("Bad result");
     }
 
-    cout << "PiuTest successful" << endl;
+    cout << "PiuTest SUCCESSFUL DONE" << endl;
 }

@@ -11,7 +11,8 @@
 
 #include "FileTypes.h"
 
-const string GEN_PATH = "/home/ary/generated_files/";
+const string TEST = "/tests.sh";
+const string GEN_PATH = "/generated_files/";
 const string GEN_EVENTS = "generated_events";
 const string LOADED_EVENTS = "loaded_events";
 const string GEN_EVENTS_FILE_PATH = GEN_PATH + GEN_EVENTS + TXT;

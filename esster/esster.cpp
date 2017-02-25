@@ -30,16 +30,19 @@ int main(int argc, char* argv[]) {
 //            //sort();
 //        }
 //    }
-//    EventsGenerator eveGen(20);
-//    eveGen.generate();
-
-    Reader reader(GEN_EVENTS_FILE_PATH);
+    EventsGenerator eveGen(50);
+    eveGen.generate();
+    BasePath bp;
+    string str = bp.getBasePath() + GEN_EVENTS_FILE_PATH;
+    cout << str << endl;
+    Reader reader(str);
     std::list<Event> evReaded = reader.readData();
     Sorter sorter(evReaded);
     Events ev = sorter.sort();
     Events events(evReaded);
     ofstream events_f;
-    events_f.open(LOADED_EVENTS_FILE_PATH.c_str());
+    str = bp.getBasePath() + LOADED_EVENTS_FILE_PATH;
+    events_f.open(str.c_str());
     int en = 1;
     for (Event e : evReaded) {
         int *angleBin = e.getAngleBin();
@@ -52,6 +55,5 @@ int main(int argc, char* argv[]) {
     }
     events_f.close();
     cout << "ALL DONE" << endl;
-
     return EXIT_SUCCESS;
 }

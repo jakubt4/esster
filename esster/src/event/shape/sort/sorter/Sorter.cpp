@@ -99,19 +99,42 @@ void Sorter::avarageU() {
 
 Events Sorter::sort() {
     ofstream events_f;
+    BasePath bp;
     string path = LOADED_EVENTS_FILE_PATH + "_init";
-    events_f.open(path.c_str());
+    string str = bp.getBasePath() + path;
+    cout << "Prepare init file..." << endl;
+    events_f.open(str.c_str());
     int en = 1;
     for (Event e : events->get()) {
         events_f << en << setw(15) << e.getMultiplicity() << setw(15) << e.getSorter() << endl;
         en++;
     }
     events_f.close();
+    cout << "OK" << endl;
     bool sort = true;
     int cyc = 1;
+    cout << "Start sorting cycle..." << endl;
     while (sort) {
+        cout << cyc << " cycle." << endl;
         sort = false;
-        avarageU();
+        //avarageU()
+        int evNo = 1;
+        std::list<Event> newEventList;
+#pragma omp parallel private(evNo)
+        for (Event event : events->get()) {
+            cout << evNo << ". event - computing" << endl;
+            clock_t begin = clock();
+            evNo++;
+            AvarageU avU(bins, event);
+            long double resu = avU.compute_avarage_u();
+            event.setSorter(resu);
+            clock_t end = clock();
+            double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+            cout << "TIME: " << elapsed_secs << " - EVENT AVAREGE U: " << resu << endl;
+            newEventList.push_back(event);
+        }
+        cout << "Sorting by actual avarage u for every event - cycle " << cyc << endl;
+        events = new Events(newEventList);
         events->sort();
         int i = 1;
         int j = 1;
@@ -140,19 +163,21 @@ Events Sorter::sort() {
         }
         events = new Events(newListOFEvents);
 
-        string cyc_str = to_string(cyc);
-        string path = LOADED_EVENTS_FILE_PATH + cyc_str;
-        ofstream events_f;
-        events_f.open(path.c_str());
-        int en = 1;
-        for (Event e : events->get()) {
-            events_f << en << setw(15) << e.getMultiplicity() << setw(15) << e.getSorter() << endl;
-            en++;
+        if (cyc % 100 == 0) {
+            string cyc_str = to_string(cyc);
+            string path = LOADED_EVENTS_FILE_PATH + cyc_str;
+            string str = bp.getBasePath() + path;
+            ofstream events_f;
+            events_f.open(str.c_str());
+            int en = 1;
+            for (Event e : events->get()) {
+                events_f << en << setw(15) << e.getMultiplicity() << setw(15) << e.getSorter() << endl;
+                en++;
+            }
+            events_f.close();
         }
-        events_f.close();
-        cout << cyc << " cycle." << endl;
         cyc++;
-        if (cyc > 10) {
+        if (cyc > 5000) {
             break;
         }
     }

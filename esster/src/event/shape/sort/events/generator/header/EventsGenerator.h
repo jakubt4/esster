@@ -11,6 +11,7 @@
 #include "../../../common/CommonLibraries.h"
 #include "../../headers/Event.h"
 #include "../../../utils/files/FilesWorker.h"
+#include "../../../utils/files/BasePath.h"
 #include "../../../utils/files/FileConstants.h"
 
 using namespace std;

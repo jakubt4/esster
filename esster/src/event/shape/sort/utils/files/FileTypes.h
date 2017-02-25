@@ -9,6 +9,7 @@
 #define UTILS_FILE_TYPES_H_
 
 #include<string>
+#include<string.h>
 
 using namespace std;
 

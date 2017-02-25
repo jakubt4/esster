@@ -16,10 +16,12 @@ std::list<Event> EventsGenerator::generate() {
     for (int i = 0; i < numOfEvents; i++) {
         prepareEvent();
     }
-
-    create_folder(GEN_PATH);
+    BasePath bp;
+    string str = bp.getBasePath();
+    create_folder(str + GEN_PATH);
     ofstream events_f;
-    events_f.open(GEN_EVENTS_FILE_PATH.c_str());
+    str = str + GEN_EVENTS_FILE_PATH;
+    events_f.open(str.c_str());
     int en = 1;
     for (Event e : events) {
         for (EventPart ep : e.get()) {

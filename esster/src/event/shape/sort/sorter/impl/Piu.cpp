@@ -17,7 +17,6 @@ long double Piu::compute_P_iu() {
     long double iAngleBinMultiplicity = 0.0;
     for (Event e : uEventBin) {
         allEventsMultiplicity += e.getMultiplicity();
-
         int *angleBin = e.getAngleBin();
         iAngleBinMultiplicity += angleBin[iPartAngleBin];
     }

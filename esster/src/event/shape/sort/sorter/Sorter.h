@@ -13,8 +13,12 @@
 #include "../utils/files/FileTypes.h"
 #include "../events/headers/Events.h"
 #include "../events/headers/Bin.h"
+#include "../utils/files/BasePath.h"
+#include "headers/AvarageU.h"
 #include <string>
 #include <math.h>
+#include <ctime>
+#include <omp.h>
 
 class Sorter {
     private:
