@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 //            //sort();
 //        }
 //    }
-    EventsGenerator eveGen(50);
+    EventsGenerator eveGen(100);
     eveGen.generate();
     BasePath bp;
     string str = bp.getBasePath() + GEN_EVENTS_FILE_PATH;

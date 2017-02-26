@@ -1,4 +1,4 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -std=c++11 -fopenmp
+CXXFLAGS =	-O2 -g -Wall -fopenmp  -pthread -fmessage-length=0 -std=c++11 
 
 #PATHS
 EVENT = src/event/shape/sort/events/impl/Event.o
@@ -25,7 +25,7 @@ TEST_AVARAGEU_OBJS =  $(EVENT) $(EVENT_PART) $(PIU) $(PNIU) $(PUNI) $(AVARAGEU) 
 TEST_OBJS = $(BASE_PATH) $(TEST)
 
 #LIBS
-LIBS =
+LIBS =  `root-config --libs --cflags` -lEG
 
 #TARGETS
 TARGET =	esster
@@ -40,7 +40,7 @@ TEST_TARGET = tests
 GEN_TEST_RUNER = ./tests
 
 $(TARGET):	$(OBJS)
-	$(CXX) -o $(TARGET) $(OBJS) $(LIBS)
+	$(CXX) -o $(TARGET) $(OBJS) $(LIBS) -fopenmp -pthread
 $(TEST_EVENT_TARGET): $(TEST_EVENT_OBJS)
 	$(CXX) -o $(TEST_EVENT_TARGET) $(TEST_EVENT_OBJS) $(LIBS)
 $(TEST_PIU_TARGET): $(TEST_PIU_OBJS)

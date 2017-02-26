@@ -32,71 +32,6 @@ Sorter::Sorter(std::list<Event> _events) {
     cout << "Number of all bins is " << bins.size() << endl;
 }
 
-long double P_i_u(int bin_i, Bin bin) {
-
-    long double multiplicityAllEvents = 0.0;
-    long double multiplicityBinIEvents = 0.0;
-    for (Event event : bin.get()) {
-        multiplicityAllEvents = multiplicityAllEvents + event.getMultiplicity();
-        int *angleBin = event.getAngleBin();
-        multiplicityBinIEvents = multiplicityBinIEvents + angleBin[bin_i];
-    }
-    if (multiplicityBinIEvents == 0) {
-        return 0.0;
-    }
-    return multiplicityBinIEvents / multiplicityAllEvents;
-}
-
-long double P_ni_u(Event event, Bin bin) {
-    long double p = 1.0;
-    int *angleBin = event.getAngleBin();
-    for (int i = 0; i < 20; i++) {
-        if (angleBin[i] == 0) {
-            continue;
-        }
-        long double p_i_u = P_i_u(i, bin);
-        if (p_i_u == 0) {
-            continue;
-        }
-        long double power = angleBin[i];
-        long double pow_r = pow(p_i_u, power);
-        p = p * pow_r;
-    }
-    return p;
-}
-
-long double P_u_ni(Event event, Bin actualBin, std::list<Bin> bins) {
-    long double numerator = 0.0;
-    long double denominator = 0.0;
-
-    numerator = P_ni_u(event, actualBin) / bins.size();
-    for (Bin bin : bins) {
-        denominator += P_ni_u(event, bin) / bins.size();
-    }
-    long double partial = numerator / denominator;
-    return partial;
-}
-
-void Sorter::avarageU() {
-    long double avarageU = 0.0;
-    int i = 1;
-    for (Event event : events->get()) {
-        int bin_u = 1;
-        for (Bin bin : bins) {
-            long double p_u_ni = P_u_ni(event, bin, bins);
-            avarageU = avarageU + (bin_u * p_u_ni);
-            bin_u++;
-        }
-        cout << avarageU << endl;
-        event.setSorter(avarageU);
-        avarageU = 0.0;
-        if (i % 10 == 0) {
-            cout << "For " << i << " events computed u." << endl;
-        }
-        i++;
-    }
-}
-
 Events Sorter::sort() {
     ofstream events_f;
     BasePath bp;
@@ -118,21 +53,21 @@ Events Sorter::sort() {
         cout << cyc << " cycle." << endl;
         sort = false;
         //avarageU()
-        int evNo = 1;
         std::list<Event> newEventList;
-#pragma omp parallel private(evNo)
-        for (Event event : events->get()) {
-            cout << evNo << ". event - computing" << endl;
-            clock_t begin = clock();
-            evNo++;
+        std::list<Event> listEvents = events->get();
+        int listEventsSize = listEvents.size();
+        std::vector<Event> vecEvent { listEvents.begin(), listEvents.end() };
+
+#pragma omp parallel for simd
+        for (int i = 0; i < listEventsSize; i++) {
+            Event event = vecEvent[i];
             AvarageU avU(bins, event);
             long double resu = avU.compute_avarage_u();
             event.setSorter(resu);
-            clock_t end = clock();
-            double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
-            cout << "TIME: " << elapsed_secs << " - EVENT AVAREGE U: " << resu << endl;
+            cout << i + 1 << ". event - computed with result - " << resu << endl;
             newEventList.push_back(event);
         }
+
         cout << "Sorting by actual avarage u for every event - cycle " << cyc << endl;
         events = new Events(newEventList);
         events->sort();
@@ -163,7 +98,7 @@ Events Sorter::sort() {
         }
         events = new Events(newListOFEvents);
 
-        if (cyc % 100 == 0) {
+        if (cyc % 1 == 0) {
             string cyc_str = to_string(cyc);
             string path = LOADED_EVENTS_FILE_PATH + cyc_str;
             string str = bp.getBasePath() + path;
