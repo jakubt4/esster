@@ -11,12 +11,9 @@
 #include "Puni.h"
 
 class AvarageU {
-    private:
-        std::list<Bin> bins;
-        Event event;
     public:
-        AvarageU(std::list<Bin> _bins, Event _event);
-        long double compute_avarage_u();
+        AvarageU();
+        long double compute_avarage_u(std::vector<Bin> bins, Event event);
         virtual ~AvarageU();
 };
 

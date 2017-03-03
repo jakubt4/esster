@@ -14,8 +14,10 @@
 const string TEST = "/tests.sh";
 const string GEN_PATH = "/generated_files/";
 const string GEN_EVENTS = "generated_events";
+const string GEN_PARTICLES = "generated_particles";
 const string LOADED_EVENTS = "loaded_events";
 const string GEN_EVENTS_FILE_PATH = GEN_PATH + GEN_EVENTS + TXT;
+const string GEN_PARTICLES_FILE_PATH = GEN_PATH + GEN_PARTICLES + TXT;
 const string LOADED_EVENTS_FILE_PATH = GEN_PATH + LOADED_EVENTS + TXT;
 
 

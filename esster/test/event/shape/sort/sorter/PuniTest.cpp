@@ -20,7 +20,7 @@ int main() {
             e.addEventPart(ep1);
             e.addEventPart(ep2);
             e.setMultiplicity(200);
-            e.fillAngleBin();
+            e.prepareAngleBins();
             b.addEvent(e);
         }
         bins.push_back(b);
@@ -34,7 +34,7 @@ int main() {
         e.addEventPart(ep1);
         e.addEventPart(ep2);
         e.setMultiplicity(200);
-        e.fillAngleBin();
+        e.prepareAngleBins();
         b.addEvent(e);
     }
 
@@ -44,7 +44,7 @@ int main() {
     e.addEventPart(ep1);
     e.addEventPart(ep2);
     e.setMultiplicity(200);
-    e.fillAngleBin();
+    e.prepareAngleBins();
 
     std::list<Event> binEv = b.get();
     Puni puni(binEv, bins, e);
@@ -67,7 +67,7 @@ int main() {
             e.addEventPart(ep1);
             e.addEventPart(ep2);
             e.setMultiplicity(200);
-            e.fillAngleBin();
+            e.prepareAngleBins();
             b.addEvent(e);
         }
         bins2.push_back(b);
@@ -83,7 +83,7 @@ int main() {
         e.addEventPart(ep2);
         e.addEventPart(ep3);
         e.setMultiplicity(1500);
-        e.fillAngleBin();
+        e.prepareAngleBins();
         b2.addEvent(e);
     }
 
@@ -97,7 +97,7 @@ int main() {
     e2.addEventPart(ep23);
     e2.addEventPart(ep24);
     e2.setMultiplicity(2000);
-    e2.fillAngleBin();
+    e2.prepareAngleBins();
 
     Puni puni2(b2.get(), bins2, e2);
     result = puni2.compute_P_u_ni();

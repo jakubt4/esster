@@ -21,7 +21,7 @@ int main() {
             e.addEventPart(ep1);
             e.addEventPart(ep2);
             e.setMultiplicity(200);
-            e.fillAngleBin();
+            e.prepareAngleBins();
             b.addEvent(e);
         }
         bins.push_back(b);
@@ -33,7 +33,7 @@ int main() {
     e.addEventPart(ep1);
     e.addEventPart(ep2);
     e.setMultiplicity(200);
-    e.fillAngleBin();
+    e.prepareAngleBins();
 
     AvarageU avarageU(bins, e);
     long double result = avarageU.compute_avarage_u();
@@ -55,7 +55,7 @@ int main() {
             e.addEventPart(ep1);
             e.addEventPart(ep2);
             e.setMultiplicity(200);
-            e.fillAngleBin();
+            e.prepareAngleBins();
             b.addEvent(e);
         }
         bins2.push_back(b);
@@ -68,7 +68,7 @@ int main() {
     e2.addEventPart(ep22);
     e2.addEventPart(ep23);
     e2.setMultiplicity(1500);
-    e2.fillAngleBin();
+    e2.prepareAngleBins();
 
     AvarageU avarageU2(bins2, e2);
     result = avarageU2.compute_avarage_u();

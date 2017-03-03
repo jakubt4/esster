@@ -7,18 +7,15 @@
 
 #include "../headers/AvarageU.h"
 
-AvarageU::AvarageU(std::list<Bin> _bins, Event _event) {
-    bins = _bins;
-    event = _event;
+AvarageU::AvarageU() {
 }
 
-long double AvarageU::compute_avarage_u() {
+long double AvarageU::compute_avarage_u(std::vector<Bin> bins, Event event) {
     long double i = 1.0;
     long double result = 0.0;
     for (Bin bin : bins) {
-        std::list<Event> binEvents = bin.get();
-        Puni puni(binEvents, bins, event);
-        long double puniResult = puni.compute_P_u_ni();
+        Puni puni;
+        long double puniResult = puni.compute_P_u_ni(bin, bins, event);
         result += (i * puniResult);
         i++;
     }

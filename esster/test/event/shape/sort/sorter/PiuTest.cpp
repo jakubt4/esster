@@ -19,7 +19,7 @@ int main() {
         e.addEventPart(ep1);
         e.addEventPart(ep2);
         e.setMultiplicity(200);
-        e.fillAngleBin();
+        e.prepareAngleBins();
         b.addEvent(e);
     }
 

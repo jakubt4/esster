@@ -10,15 +10,12 @@
 
 #include <math.h>
 #include "Piu.h"
-#include "../../events/headers/Event.h"
+#include "../../events/headers/Bin.h"
 
 class Pniu {
-    private:
-        std::list<Event> bin;
-        Event event;
     public:
-        Pniu(std::list<Event> _bin, Event _event);
-        long double compute_P_ni_u();
+        Pniu();
+        long double compute_P_ni_u(Bin b, Event event);
         virtual ~Pniu();
 };
 

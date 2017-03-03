@@ -7,22 +7,19 @@
 
 #include "../headers/Puni.h"
 
-Puni::Puni(std::list<Event> _bin, std::list<Bin> _bins, Event _event) {
-    bin = _bin;
-    bins = _bins;
-    event = _event;
+Puni::Puni() {
 }
 
-long double Puni::compute_P_u_ni() {
-    Pniu pniu(bin, event);
-    long double resultPniu = pniu.compute_P_ni_u();
+long double Puni::compute_P_u_ni(Bin b, std::vector<Bin> bins, Event event) {
+    Pniu pniu;
+    long double resultPniu = pniu.compute_P_ni_u(b, event);
     long double numerator = resultPniu / 10.0;
 
     long double denominator = 0.0;
     for (Bin b : bins) {
         std::list<Event> innerBin = b.get();
-        Pniu pniu(innerBin, event);
-        long double resultPniuPart = pniu.compute_P_ni_u();
+        Pniu pniu;
+        long double resultPniuPart = pniu.compute_P_ni_u(b, event);
         denominator += resultPniuPart / 10.0;
     }
 

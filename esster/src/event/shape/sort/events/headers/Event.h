@@ -9,30 +9,29 @@
 #define EVENT_SHAPE_SORT_EVENTS_HEADERS_EVENT_H_
 
 #include "../../common/CommonLibraries.h"
-#include "EventPart.h"
+#include "Particle.h"
 #include <vector>
 
 class Event {
     private:
-        std::list<EventPart> eventParts;
+        std::list<Particle> particles;
         int multiplicity;
         int id = 0;
         double sorter = 0.0;
         int angle_bin[20];
     public:
         Event();
-        void addEventPart(const EventPart eventPart);
-        std::list<EventPart> get();
+        void addParticle(Particle p);
+        std::list<Particle> getParticles();
         void setMultiplicity(int _multiplicity);
         int getMultiplicity();
         void setSorter(double _sorter);
         double getSorter();
         void setActualEventBin(int _id);
         int getActualEventBin();
-        void fillAngleBin();
+        void prepareAngleBins();
         int* getAngleBin();
         long double PI = 3.14159265358979323846;
-        EventPart getActualEventPart(int actualEventPart);
         virtual ~Event();
 };
 

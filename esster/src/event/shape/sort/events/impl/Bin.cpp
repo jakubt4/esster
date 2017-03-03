@@ -7,7 +7,10 @@
 
 #include "../headers/Bin.h"
 
-Bin::Bin(int _id) {
+Bin::Bin() {
+}
+
+void Bin::setId(int _id) {
     id = _id;
 }
 
@@ -23,6 +26,27 @@ int Bin::getId() {
     return id;
 }
 
+void Bin::setMultiplicityOverMyEvents(long double _mOverMyEvents) {
+    mOverMyEvents = _mOverMyEvents;
+}
+
+long double Bin::getMultiplicityOverMyEvents() {
+    return mOverMyEvents;
+}
+void Bin::setMultiplicityOverAngleBins(long double* _mOverAngleBins) {
+    for (int i = 0; i < 20; i++) {
+        mOverAngleBins[i] = _mOverAngleBins[i];
+    }
+}
+
+long double* Bin::getMultiplicityOverAngleBins() {
+    return mOverAngleBins;
+}
+
 Bin::~Bin() {
+    for (Event e : events) {
+        e.getParticles().clear();
+    }
+    events.clear();
 }
 

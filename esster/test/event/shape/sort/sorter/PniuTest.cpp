@@ -19,7 +19,7 @@ int main() {
         e.addEventPart(ep1);
         e.addEventPart(ep2);
         e.setMultiplicity(200);
-        e.fillAngleBin();
+        e.prepareAngleBins();
         b.addEvent(e);
     }
     Event e;
@@ -28,7 +28,7 @@ int main() {
     e.addEventPart(ep1);
     e.addEventPart(ep2);
     e.setMultiplicity(200);
-    e.fillAngleBin();
+    e.prepareAngleBins();
 
     Pniu pniu(b.get(), e);
     long double result = pniu.compute_P_ni_u();
@@ -49,7 +49,7 @@ int main() {
     e2.addEventPart(ep22);
     e2.addEventPart(ep23);
     e2.setMultiplicity(1500);
-    e2.fillAngleBin();
+    e2.prepareAngleBins();
 
     Pniu pniu2(b.get(), e2);
     result = pniu2.compute_P_ni_u();

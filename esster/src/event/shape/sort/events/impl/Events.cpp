@@ -29,5 +29,9 @@ int Events::size() {
 }
 
 Events::~Events() {
+    for (Event e : events) {
+        e.getParticles().clear();
+    }
+    events.clear();
 }
 

@@ -14,12 +14,12 @@ Event::Event() {
     }
 }
 
-void Event::addEventPart(EventPart eventPart) {
-    eventParts.push_back(eventPart);
+void Event::addParticle(Particle p) {
+    particles.push_back(p);
 }
 
-std::list<EventPart> Event::get() {
-    return eventParts;
+std::list<Particle> Event::getParticles() {
+    return particles;
 }
 
 void Event::setMultiplicity(int _multiplicity) {
@@ -46,13 +46,14 @@ int Event::getActualEventBin() {
     return id;
 }
 
-void Event::fillAngleBin() {
+void Event::prepareAngleBins() {
     long double baseAngle = PI / 10.0;
-    for (EventPart eventPart : eventParts) {
-        long double angle = eventPart.getAngle();
+    for (Particle p : particles) {
+        long double angle = p.getAngle();
         for (int i = 0; i < 20; i++) {
             if (angle >= (baseAngle * i) && angle < (baseAngle * (i + 1))) {
-                angle_bin[i] = angle_bin[i] + eventPart.getParticles();
+                angle_bin[i] += 1;
+                break;
             }
         }
     }
@@ -62,11 +63,7 @@ int* Event::getAngleBin() {
     return angle_bin;
 }
 
-EventPart Event::getActualEventPart(int actualEventPart) {
-    std::vector<EventPart> vecEventPart { eventParts.begin(), eventParts.end() };
-    return vecEventPart[actualEventPart];
-}
-
 Event::~Event() {
+    particles.clear();
 }
 

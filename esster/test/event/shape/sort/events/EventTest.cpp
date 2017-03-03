@@ -18,7 +18,7 @@ int main() {
         ev.addEventPart(ep);
     }
     ev.setMultiplicity(M);
-    ev.fillAngleBin();
+    ev.prepareAngleBins();
 
     if (ev.getMultiplicity() != 2250) {
         cout << "Multiplicity of event should be 2250 but was " << ev.getMultiplicity() << endl;

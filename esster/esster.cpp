@@ -19,27 +19,28 @@
 #include "src/event/shape/sort/sorter/Sorter.h"
 
 int main(int argc, char* argv[]) {
-//    for (int i = 1; i < argc; ++i) {
-//        if (strcmp(argv[i], "-gen") == 0) {
-//            if ((i + 1) < argc) {
-//                generate(atoi(argv[i + 1]));
-//            } else {
-//                generate(NUM_OF_EVENTS);
-//            }
-//        } else if (strcmp(argv[i], "-sort")) {
-//            //sort();
-//        }
-//    }
-    EventsGenerator eveGen(100);
-    eveGen.generate();
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-gen") == 0) {
+            if ((i + 1) < argc) {
+                EventsGenerator eveGen(atoi(argv[i + 1]));
+                i++;
+                eveGen.generate();
+            } else {
+                EventsGenerator eveGen(1000);
+                eveGen.generate();
+            }
+        } else {
+            cout << "Bad parameter !!" << endl;
+            cout << "Try: -gen int" << endl;
+            return 0;
+        }
+    }
+
     BasePath bp;
-    string str = bp.getBasePath() + GEN_EVENTS_FILE_PATH;
-    cout << str << endl;
+    string str = bp.getBasePath() + GEN_PARTICLES_FILE_PATH;
     Reader reader(str);
     std::list<Event> evReaded = reader.readData();
-    Sorter sorter(evReaded);
-    Events ev = sorter.sort();
-    Events events(evReaded);
+
     ofstream events_f;
     str = bp.getBasePath() + LOADED_EVENTS_FILE_PATH;
     events_f.open(str.c_str());
@@ -54,6 +55,11 @@ int main(int argc, char* argv[]) {
 //        en++;
     }
     events_f.close();
+
+    Sorter sorter(evReaded);
+    Events ev = sorter.sort();
+//    Events events(evReaded);
+
     cout << "ALL DONE" << endl;
     return EXIT_SUCCESS;
 }

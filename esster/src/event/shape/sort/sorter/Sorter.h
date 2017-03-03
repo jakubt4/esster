@@ -12,7 +12,7 @@
 #include "../utils/files/FileConstants.h"
 #include "../utils/files/FileTypes.h"
 #include "../events/headers/Events.h"
-#include "../events/headers/Bin.h"
+#include "../events/headers/Bins.h"
 #include "../utils/files/BasePath.h"
 #include "headers/AvarageU.h"
 #include <string>
@@ -22,10 +22,8 @@
 
 class Sorter {
     private:
-        Events* events;
-        int eventsInBin = 10;
-        std::list<Bin> bins;
-        void avarageU();
+        int eventsInBin;
+        std::vector<Bin> bins;
     public:
         Sorter(std::list<Event> _events);
         Events sort();

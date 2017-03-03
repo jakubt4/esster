@@ -12,13 +12,9 @@
 #include "Pniu.h"
 
 class Puni {
-    private:
-        std::list<Event> bin;
-        std::list<Bin> bins;
-        Event event;
     public:
-        Puni(std::list<Event> _bin, std::list<Bin> _bins, Event _event);
-        long double compute_P_u_ni();
+        Puni();
+        long double compute_P_u_ni(Bin b, std::vector<Bin> bins, Event event);
         virtual ~Puni();
 };
 
