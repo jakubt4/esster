@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     Reader reader(str);
     std::list<Event> evReaded = reader.readData();
 
-    ofstream events_f;
+    ofstream events_f, particles_f;
     str = bp.getBasePath() + LOADED_EVENTS_FILE_PATH;
     events_f.open(str.c_str());
     int en = 1;
@@ -57,8 +57,26 @@ int main(int argc, char* argv[]) {
     events_f.close();
 
     Sorter sorter(evReaded);
-    Events ev = sorter.sort();
-//    Events events(evReaded);
+    std::vector<Bin> ev = sorter.sort();
+
+    str = bp.getBasePath() + GEN_PATH + "sorted_events.txt";
+    events_f.open(str.c_str());
+    str = bp.getBasePath() + GEN_PATH + "sorted_particles.txt";
+    particles_f.open(str.c_str());
+    int binsSize = ev.size();
+    int evn = 1;
+    for (int i = 0; i < binsSize; i++) {
+        for (Event e : ev[i].get()) {
+            events_f << evn << setw(15) << e.getMultiplicity() << setw(15) << e.getSorter() << endl;
+            int *angleBin = e.getAngleBin();
+            for (int i = 0; i < 20; i++) {
+                particles_f << evn << setw(15) << i << setw(15) << angleBin[i] << endl;
+            }
+            evn++;
+        }
+    }
+    events_f.close();
+    particles_f.close();
 
     cout << "ALL DONE" << endl;
     return EXIT_SUCCESS;

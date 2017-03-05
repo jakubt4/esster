@@ -26,7 +26,7 @@ class Sorter {
         std::vector<Bin> bins;
     public:
         Sorter(std::list<Event> _events);
-        Events sort();
+        std::vector<Bin> sort();
         virtual ~Sorter();
 };
 

@@ -36,7 +36,7 @@ Sorter::Sorter(std::list<Event> _events) {
 
 }
 
-Events Sorter::sort() {
+std::vector<Bin> Sorter::sort() {
     ofstream events_f;
     BasePath bp;
     string path = LOADED_EVENTS_FILE_PATH + "_init";
@@ -191,10 +191,6 @@ Events Sorter::sort() {
         }
         delete events;
 
-        for (Bin b : bins) {
-            b.~Bin();
-        }
-
 //        if (cyc % 1 == 0) {
 //            string cyc_str = to_string(cyc);
 //            string path = LOADED_EVENTS_FILE_PATH + cyc_str;
@@ -217,8 +213,7 @@ Events Sorter::sort() {
 
         cyc++;
     }
-    std::list<Event> ev;
-    return ev;
+    return bins;
 }
 
 Sorter::~Sorter() {
